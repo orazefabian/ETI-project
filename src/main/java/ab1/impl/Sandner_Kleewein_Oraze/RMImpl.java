@@ -1,8 +1,6 @@
 package ab1.impl.Sandner_Kleewein_Oraze;
 
 import ab1.RM;
-
-import java.util.Arrays;
 import java.util.List;
 
 public class RMImpl implements RM {
@@ -23,8 +21,6 @@ public class RMImpl implements RM {
 
         for (int i = 0; i < programm.size(); i++) {
             i = checkCommand(programm.get(i), i, programm.size());
-            //System.out.println("current index: " + i);
-            //System.out.println(Arrays.toString(memoryContent)); //TODO: REMOVE!!
         }
         return true;
     }
@@ -38,8 +34,7 @@ public class RMImpl implements RM {
         }
         String param = temp[1];
 
-        //to ignore case sensitivity
-        switch (command.toLowerCase()) {
+        switch (command.toLowerCase()) { //lowerCase to ignore case sensitivity
             case "load":
                 execLoad(param);
                 break;
