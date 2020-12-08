@@ -72,7 +72,22 @@ public class Tests {
 
 	@Test
 	public void execution2() {
+		rm.setInitialMemoryContent(new int[]{0, 3, 5});
+		boolean success = rm.execute(Arrays.asList(
+				"LOAD 1",
+				"SUB 2",
+				"JZERO 7",
+				"LOAD 1",
+				"STORE 3",
+				"GOTO 9",
+				"LOAD 2",
+				"STORE 3",
+				"END"));
 
+		assertThat(success)
+				.isTrue();
+		assertThat(rm.getMemoryContent())
+				.isEqualTo(new int[]{5, 3, 5, 5});
 	}
 
 	@Test

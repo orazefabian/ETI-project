@@ -123,7 +123,12 @@ public class RMImpl implements RM {
     }
 
     private void execSub(String param) {
-        memoryContent[0] -= getParamValue(param);
+        int par = getParamValue(param);
+        if (memoryContent[0] < par) {
+            memoryContent[0] = 0;
+        } else {
+            memoryContent[0] -= getParamValue(param);
+        }
     }
 
     private void execMult(String param) {
@@ -136,7 +141,7 @@ public class RMImpl implements RM {
 
     private int execJzero(String param, int index) {
         if (memoryContent[0] == 0) {
-            return Integer.parseInt(param) - 1;
+            return Integer.parseInt(param) - 2;
         }
         return index;
     }
