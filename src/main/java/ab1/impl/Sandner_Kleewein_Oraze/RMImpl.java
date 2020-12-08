@@ -22,21 +22,21 @@ public class RMImpl implements RM {
     public boolean execute(List<String> programm) {
 
         for (int i = 0; i < programm.size(); i++) {
-            i = checkCommand(programm.get(i), i);
+            i = checkCommand(programm.get(i), i, programm.size());
             //System.out.println("current index: " + i);
             //System.out.println(Arrays.toString(memoryContent)); //TODO: REMOVE!!
         }
         return true;
     }
 
-    private int checkCommand(String x, int index) {
+    private int checkCommand(String x, int index, int amountOfCommands) {
         String[] temp = x.split(" ");
         String command = temp[0];
 
         if (command.toLowerCase().equals("end")) {
-            return index;
+            return amountOfCommands;
         }
-        String param = temp[1]; //TODO: check null and if its END
+        String param = temp[1];
 
         //to ignore case sensitivity
         switch (command.toLowerCase()) {
