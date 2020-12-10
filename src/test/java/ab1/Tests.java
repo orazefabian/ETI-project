@@ -72,32 +72,76 @@ public class Tests {
 
 	@Test
 	public void execution2() {
-		rm.setInitialMemoryContent(new int[]{0, 3, 5});
+		rm.setInitialMemoryContent(new int[]{0, 10, 8});
 		boolean success = rm.execute(Arrays.asList(
 				"LOAD 1",
 				"SUB 2",
-				"JZERO 7",
-				"LOAD 1",
 				"STORE 3",
-				"GOTO 9",
 				"LOAD 2",
+				"SUB 1",
+				"STORE 4",
+				"LOAD 1",
+				"ADD 2",
+				"ADD 3",
+				"ADD 4",
+				"DIV #2",
 				"STORE 3",
 				"END"));
 
 		assertThat(success)
 				.isTrue();
 		assertThat(rm.getMemoryContent())
-				.isEqualTo(new int[]{5, 3, 5, 5});
+				.isEqualTo(new int[]{10, 10, 8, 10});
+
+		pts += 3;
 	}
 
 	@Test
 	public void execution3() {
+		rm.setInitialMemoryContent(new int[]{0, 10});
+		boolean success = rm.execute(Arrays.asList(
+				"LOAD 1",
+				"STORE 3",
+				"LOAD #3",
+				"STORE 1",
+				"schleife: LOAD *1",
+				"SUB #1",
+				"STORE 2",
+				"LOAD 1",
+				"ADD #1",
+				"STORE 1",
+				"LOAD 2",
+				"STORE *1",
+				"JZERO ende",
+				"GOTO schleife",
+				"ende: END"));
 
+		assertThat(success)
+				.isTrue();
+		assertThat(rm.getMemoryContent())
+				.isEqualTo(new int[]{0, 13, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
+
+		pts += 3;
 	}
 
 	@Test
 	public void execution4() {
+		rm.setInitialMemoryContent(new int[]{});
+		boolean success = rm.execute(Arrays.asList(
+				"LOAD #2",
+				"SUB #1",
+				"SUB #1",
+				"SUB #1",
+				"SUB #1",
+				"STORE 1",
+				"END"));
 
+		assertThat(success)
+				.isTrue();
+		assertThat(rm.getMemoryContent())
+				.isEqualTo(new int[]{});
+
+		pts += 3;
 	}
 
 	@AfterAll
